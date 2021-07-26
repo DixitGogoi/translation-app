@@ -27,7 +27,7 @@
             border-radius: 25px;
             cursor: pointer;
         }
-        #txt{
+        #txt, #output{
             font-size: 2rem;
             display: block;
             height: 20vh;
@@ -39,6 +39,7 @@
             border-radius: 25px;
             padding: 15px;
         }
+       
 
     </style>
 </head>
@@ -46,21 +47,21 @@
     <h1>This is a translation app</h1>
     <textarea placeholder="Write your sentence here and get i translated to banana language" id="txt" ></textarea>
     <button id="btn">Translate</button>
+    <div id="output"></div>
     <script>
-        // function clickHandler(){
-        //     console.log("clicked");
-        //     console.log("input given ",txtEvent.value);
-        // }
+        function clickHandler(){
+            // console.log("clicked");
+            // console.log("input given ",txtEvent.value);
+            outputEvent.innerText="kargil " + txtEvent.value + " is translated";
+        }
 
         // alert("Do you want to continue?");
 
         let btnEvent=document.querySelector("#btn");
         let txtEvent=document.querySelector("#txt");
+        let outputEvent=document.querySelector("#output");
 
-        btnEvent.addEventListener("click", function clickHandler(){
-            console.log("clicked");
-            console.log("input given ",txtEvent.value);
-        })
+        btnEvent.addEventListener("click", clickHandler);
 
     </script>
 </body>
