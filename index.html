@@ -47,15 +47,20 @@
     <textarea placeholder="Write your sentence here and get i translated to banana language" id="txt" ></textarea>
     <button id="btn">Translate</button>
     <script>
-        function clickHandler(){
-            console.log("clicked");
-            console.log("input given ",txtEvent.value);
-        }
-        alert("Do you want to continue?");
+        // function clickHandler(){
+        //     console.log("clicked");
+        //     console.log("input given ",txtEvent.value);
+        // }
+
+        // alert("Do you want to continue?");
+
         let btnEvent=document.querySelector("#btn");
         let txtEvent=document.querySelector("#txt");
 
-        btnEvent.addEventListener("click", clickHandler());
+        btnEvent.addEventListener("click", function clickHandler(){
+            console.log("clicked");
+            console.log("input given ",txtEvent.value);
+        })
 
     </script>
 </body>
