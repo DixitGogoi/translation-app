@@ -8,58 +8,139 @@
     
     <style>
         body{
-            background-color: yellow;
-            font-family: 'Heebo', sans-serif;
+            background-color: rgb(246, 246, 246);
+            /* font-family: 'Heebo', sans-serif; */
+            font-family: 'Dancing Script', cursive;
         }
         h1{
             padding: 15px;
-            margin: 10px;
+            margin: 10px auto;
             font-size: 3rem;
+            display: block;
+            text-align: center;
         }
         #btn{
-            background-color: blue;
+            background-color: rgb(235, 88, 112);
             color: aliceblue;
             display: block;
             height: 10vh;
             margin: 40px 10px;
             width: 300px;
-            font-size: 2rem;
+            font-size: 2.6rem;
             border-radius: 25px;
             cursor: pointer;
+            font-weight: bolder;
+            font-family: 'Dancing Script', cursive;
         }
         #txt, #output{
             font-size: 2rem;
             display: block;
-            height: 20vh;
+            height: 27vh;
             margin: 40px 10px;
-            width: 90%;
+            width: 50%;
             background-color: rgb(96, 211, 240);
             color: black;
             font-weight: bold;
             border-radius: 25px;
+            font-family: 'Dancing Script', cursive;
             padding: 15px;
         }
-       
+        img{
+            /* display: inline;
+            white-space: nowrap; */
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 50;
+            left: 60%;
+            height: 50vh;
+        }
+        footer{
+            background-color: rgb(230, 201, 168);
+            height: 37vh;
+            margin: 40px 10px;
+            border-radius: 25px;
+            padding: 0px 25px;
+        }
+        h2{
+            text-align: center;
+            font-size: 5rem;
+            color: rgb(22, 39, 39);
+        }
+        .link{
+            font-size: 3rem;
+            color: rgb(18, 20, 22);
+            text-align: right;
+            text-decoration: none;
+        }
+        a{
+            display: block;
+            text-align: right;
+        }
+        a:hover{
+            color: rgb(101, 101, 240);
+            cursor: pointer;
 
+        }
+       
     </style>
 </head>
 <body>
     <h1>This is a translation app</h1>
-    <textarea placeholder="Write your sentence here and get i translated to banana language" id="txt" ></textarea>
+    <textarea placeholder="Write your sentence here and get it translated to banana language" id="txt" ></textarea>
     <button id="btn">Translate</button>
     <div id="output"></div>
+    <div class="image">
+        <img src="https://png.pngitem.com/pimgs/s/11-119248_iloveminions-yellow-bananas-minions-sticker-report-best-friend.png" >
+    </div>
+    <!-- <footer>
+        <h2>follow me on</h2>
+        <a class="link" href="https://www.facebook.com/dixit.gogoi.9">fb</a>
+        <a class="link" href="https://www.instagram.com/">instagram</a>
+        <a class="link" href="https://www.facebook.com/dixit.gogoi.9">gitHub</a>
+    </footer> -->
+    
     <script>
-        function clickHandler(){
-            // console.log("clicked");
-            // console.log("input given ",txtEvent.value);
-            outputEvent.innerText="kargil " + txtEvent.value + " is translated";
-        }
+        // function clickHandler(){
+        //     // console.log("clicked");
+        //     // console.log("input given ",txtEvent.value);
+        //     outputEvent.innerText="kargil " + txtEvent.value + " is translated";
+        // }
 
         // alert("Do you want to continue?");
 
         let btnEvent=document.querySelector("#btn");
         let txtEvent=document.querySelector("#txt");
         let outputEvent=document.querySelector("#output");
+
+        let serverUrl="https://api.funtranslations.com/translate/minion.json";
+
+        function getTranslationUrl(input){
+            return serverUrl + "?text=" + input
+        }
+
+        function errorHandler(error){
+            console.log("error occured", error);
+            alert("We have something wrong with the server. Trying to rsolve it soon. Sorry for the delay.")
+        }
+
+        function clickHandler(){
+            // console.log("clicked");
+            // console.log("input given ",txtEvent.value);
+
+            let inputValue=txtEvent.value;
+
+            fetch(getTranslationUrl(inputValue))
+                .then(response => response.json())
+                .then(json => {
+                    let translatedText = json.contents.translated;
+                    outputEvent.innerText = translatedText;
+                    })
+                .catch(errorHandler)
+                }
+
+            // outputEvent.innerText="kargil " + txtEvent.value + " is translated";
 
         btnEvent.addEventListener("click", clickHandler);
 
